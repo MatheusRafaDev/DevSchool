@@ -11,7 +11,7 @@ const Container = styled.div`
 
     position: sticky;
     top: 0px;
-
+    
         
     .header-left-box {
         display: flex;
