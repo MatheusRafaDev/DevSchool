@@ -1,10 +1,17 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
+import LoadingBar from 'react-top-loading-bar'
 
 import Cabecalho from '../../components/cabecalho'
 import Menu from '../../components/menu'
 
 import { Container, Conteudo } from './styled'
+import { useState, useEffect, useRef } from 'react';
 
-import { useState, useEffect } from 'react';
 
 import Api from '../../service/api';
 const api = new Api();
@@ -21,8 +28,10 @@ export default function Index() {
 
 
     async function listar() {
+        loading.current.continuousStart();
         let r = await api.listar();
         setAlunos(r);
+        loading.current.complete();
     }
 
     async function inserir() {
@@ -31,16 +40,16 @@ export default function Index() {
             let r = await api.inserir(nome, chamada, curso, turma);
 
             if (r.erro)
-                alert(r.erro);
+                toast.error(`${r.erro}`);
             else
-                alert('Aluno inserido!');
+                toast.dark('💕 Aluno inserido!');
         } else {
             let r = await api.alterar(idAlterando, nome, chamada, curso, turma);
 
             if (r.erro)
-                alert(r.erro);
+                toast.error(`${r.erro}`);
             else
-                alert('Aluno alterado!');
+                toast.dark('💕 Aluno alterado!');
         }
 
         limparCampos();
@@ -55,11 +64,28 @@ export default function Index() {
         setIdAlterando(0);
     }
 
-    async function remover(id) {
-        let r = await api.remover(id);
-        alert('Aluno removido');
-
-        listar();
+    function remover(id) {
+        confirmAlert({
+            title: 'Remover aluno',
+            message: `Tem certeza que deseja remover o aluno ${id} ?`,
+            buttons: [
+              {
+                label: 'Sim',
+                    onClick: async () => {
+                        let r = await api.remover(id);
+                        if (r.erro)
+                            toast.error(`${r.erro}`);
+                        else {
+                            toast.dark('💕 Aluno removido!');
+                            listar();
+                        }
+                }
+              },
+              {
+                label: 'Não'
+              }
+            ]
+          });
     }
 
     async function editar(item) {
@@ -70,15 +96,20 @@ export default function Index() {
         setIdAlterando(item.id_matricula);
     }
 
-
+    
+    
     // funcao chamada 1x quando a tela abre
     useEffect(() => {
-        listar();
+       listar();
     }, [])
 
 
+    let loading = useRef();
+
     return (
         <Container>
+            <ToastContainer />
+            <LoadingBar color="#EA10C7" ref={loading} />
             <Menu />
             <Conteudo>
                 <Cabecalho />
@@ -112,7 +143,7 @@ export default function Index() {
                                     <div class="input"> <input  type="text" value={turma} onChange={e => setTurma(e.target.value)}  /> </div> 
                                 </div>
                             </div>
-                            <div class="button-create"> <button onClick={inserir}> {idAlterando == 0 ? "Cadastrar" : "Alterar"} </button> </div>
+                            <div class="button-create"> <button onClick={inserir}> {idAlterando == 0 ? "Cadastrar" : "Alterar"}  </button> </div>
                         </div>
                     </div>
 
@@ -138,7 +169,7 @@ export default function Index() {
                             <tbody>
 
                                 {alunos.map((item, i) => 
-
+                                    
                                     <tr className={i % 2 == 0 ? "linha-alternada" : ""}>
                                         <td> {item.id_matricula} </td>
                                         <td title={item.nm_aluno}>
@@ -150,10 +181,14 @@ export default function Index() {
                                         <td> {item.nm_turma} </td>
                                         <td> {item.nm_curso} </td>
                                         <td className="coluna-acao"> <button onClick={() => editar(item)} > <img src="/assets/images/edit.svg" alt="" /> </button> </td>
-                                        <td className="coluna-acao"> <button onClick={() => remover(item.id_matricula) }> <img src="/assets/images/trash.svg" alt="" /> </button> </td>
-                                    </tr>
+                                        <td className="coluna-acao"> <button onClick={() => remover(item.id_matricula)}> <img src="/assets/images/trash.svg" alt="" /> </button> </td>
+                                    </tr>    
+                                    
                                     
                                 )}
+
+                                
+                                
 
                             </tbody> 
                         </table>
