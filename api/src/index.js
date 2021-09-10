@@ -2,7 +2,6 @@ import db from './db.js';
 import express from 'express'
 import cors from 'cors'
 import sequelize from 'sequelize';
-
 const Op = sequelize.Op;
 
 const app = express();
@@ -24,7 +23,8 @@ app.post('/matricula', async (req, resp) => {
         let { nome, chamada, curso, turma } = req.body;
 
         if (!validarCampos(req.body, resp)) return;
-        if ((!await validarDuplicidade(req.body, resp, id))) return;
+        if (!(await validarDuplicidade(req.body, resp))) return;
+
 
         let r = await db.tb_matricula.create({
             nm_aluno: nome,
@@ -46,7 +46,7 @@ app.put('/matricula/:id', async (req, resp) => {
         if (!validarCampos(req.body, resp)) return;
         if (!(await validarDuplicidade(req.body, resp, id))) return;
 
-        let r = await db.tb_matricula.update(
+        await db.tb_matricula.update(
             {
                 nm_aluno: nome,
                 nr_chamada: chamada,
@@ -67,7 +67,7 @@ app.delete('/matricula/:id', async (req, resp) => {
     try {
         let { id } = req.params;
 
-        let r = await db.tb_matricula.destroy({ where: { id_matricula: id } })
+        await db.tb_matricula.destroy({ where: { id_matricula: id } })
         resp.sendStatus(200);
     } catch (e) {
         resp.send({ erro: e.toString() })
