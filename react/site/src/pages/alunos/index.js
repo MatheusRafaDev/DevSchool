@@ -39,15 +39,19 @@ export default function Index() {
         if (idAlterando == 0) {
             let r = await api.inserir(nome, chamada, curso, turma);
 
-            if (r.erro)
+            if (r.erro) {
                 toast.error(`${r.erro}`);
+                return;
+            }
             else
                 toast.dark('💕 Aluno inserido!');
         } else {
             let r = await api.alterar(idAlterando, nome, chamada, curso, turma);
 
-            if (r.erro)
+            if (r.erro) {
                 toast.error(`${r.erro}`);
+                return;
+            }
             else
                 toast.dark('💕 Aluno alterado!');
         }
