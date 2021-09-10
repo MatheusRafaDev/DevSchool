@@ -71,14 +71,14 @@ export default function Index() {
             buttons: [
               {
                 label: 'Sim',
-                    onClick: async () => {
-                        let r = await api.remover(id);
-                        if (r.erro)
-                            toast.error(`${r.erro}`);
-                        else {
-                            toast.dark('💕 Aluno removido!');
-                            listar();
-                        }
+                onClick: async () => {
+                    let r = await api.remover(id);
+                    if (r.erro)
+                        toast.error(`${r.erro}`);
+                    else {
+                        toast.dark('💕 Aluno removido!');
+                        listar();
+                    }
                 }
               },
               {
@@ -96,7 +96,6 @@ export default function Index() {
         setIdAlterando(item.id_matricula);
     }
 
-    
     
     // funcao chamada 1x quando a tela abre
     useEffect(() => {
