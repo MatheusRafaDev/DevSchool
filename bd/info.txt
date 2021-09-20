@@ -1,0 +1,26 @@
+
+
+
+create table tb_matricula (
+    id_matricula        int not null primary key AUTO_INCREMENT,
+    nm_aluno            varchar(400),
+    nr_chamada          int,
+    nm_curso            varchar(400),
+    nm_turma            varchar(400)
+);
+
+
+
+create table tb_produto (
+    id_produto      int not null primary key auto_increment,
+    nm_produto      varchar(255),
+    ds_categoria    varchar(255),
+    vl_preco_de     decimal(10,2),
+    vl_preco_por    decimal(10,2),
+    vl_avaliacao    decimal(10,2),
+    ds_produto      varchar(255),
+    qtd_estoque     int,
+    img_produto     varchar(800),
+    bt_ativo        boolean,
+    dt_inclusao     datetime
+);

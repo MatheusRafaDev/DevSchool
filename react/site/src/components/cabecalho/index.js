@@ -2,7 +2,7 @@
 import { Container } from './styled'
 
 
-export default function Index() {
+export default function Index(props) {
     return (
         <Container>
             <div class="reader-right-box">
@@ -15,7 +15,7 @@ export default function Index() {
                 </div>
                 
                 <div class="box-image">
-                    <div class="refresh-button"> <button> <img src="/assets/images/refresh.svg" alt = "" />  </button> </div>
+                    <div class="refresh-button"> <button onClick={props.atualizar}> <img src="/assets/images/refresh.svg" alt = "" />  </button> </div>
                     <div class="left-button"> <button> <img src="/assets/images/log-out.svg" alt = "" />  </button> </div>
                 </div>
             </div>

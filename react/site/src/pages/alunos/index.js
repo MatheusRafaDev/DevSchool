@@ -115,7 +115,7 @@ export default function Index() {
             <LoadingBar color="#EA10C7" ref={loading} />
             <Menu />
             <Conteudo>
-                <Cabecalho />
+                <Cabecalho atualizar={listar} />
                 <div class="body-right-box">
                     <div class="new-student-box">
                         
