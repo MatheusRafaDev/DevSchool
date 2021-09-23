@@ -1,6 +1,7 @@
+
 import axios from 'axios'
 const api = axios.create({
-    baseURL: 'https://nsfdevschoolapi.herokuapp.com/'
+    baseURL: 'https://devschooloficial.herokuapp.com'
 })
 
 
@@ -25,3 +26,11 @@ export default class Api {
         return r.data;
     }
 }
+
+
+
+
+
+
+
+

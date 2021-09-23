@@ -3,10 +3,10 @@
 
 ## Netlify
 
-- Criar uma conta na Netlify
-- Criar um projeto
-- Vincular o projeto ao Github
-- No Menu **Build & Deploy**, configurar conforme abaixo:
+1. Criar uma **conta** na Netlify;
+1. Criar um **projeto**;
+1. **Vincular** o projeto ao Github;
+1. No Menu **Build & Deploy**, configurar conforme abaixo:
 
 ![Build](build-netlify.PNG)
 
@@ -26,3 +26,11 @@ Nome da pasta que conterá os arquivos compilados para publicação. Ex. react/s
 ### Próximas Atualizações
 
 O processo acima deve ser feito apenas uma vez. Para publicar as novas alterações realizadas no REACT, somente é necessário realizar os comandos de **commit** e **push** para que o próprio Netlify realize a publicação **automaticamente**.
+
+
+
+## NÃO SE ESQUEÇA
+
+Você deve alterar seu arquivo no diretório **service** para apontar para a API publicada na Heroku. Depois é só fazer Commit e Push.
+
+![heroku](netlify-heroku.png)

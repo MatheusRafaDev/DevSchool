@@ -20,13 +20,17 @@
 Isso irá subir o projeto **api** para o repositório **heroku**.
 
 ### Na Heroku
-- Criar uma conta na Heroku
-- Criar um projeto na Heroku
-- Vincular o projeto ao Github criado anteriormente
-- Publicar (Deploy)
+1. Criar uma **conta** na Heroku;
+1. Criar um **projeto** na Heroku;
+1. **Conectar** o projeto ao Github criado anteriormente;
+1. Publicar (**Clicar em Deploy**).
 
 ![heroku](heroku1.png)
 ![heroku](heroku2.png)
+
+>- Marque a opção **Enable Automatic Deploys** para que a Heroku publique automaticamente sua API quando um commit for feito no repositório vinculado.
+
+>- Após publicado, o link da API pode ser encontrado clicando no botão **open app**.
 
 
 
